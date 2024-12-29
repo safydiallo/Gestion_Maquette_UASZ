@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Test</title>
+
+    <link rel="stylesheet" href="./styles.css">
+
+    <style>
+        body{
+        background-image: url("/essai5.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+        .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: darkgreen;
+        background-image: url("/green.jpeg");
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        }
+
+        .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+        color: darkorange;
+        }
+
+        .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        }
+
+        #main {
+        transition: margin-left .5s;
+        padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <img src="/logo.png" alt="Logo UASZ" width="100" height="100" style="text-align:center; border-radius:50%;"/>
+        <br/><br/>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="http://localhost:8080/filiere">Filiere</a>
+        <a href="http://localhost:8080/formation">Formation</a>
+        <a href="http://localhost:8080/classe">Classe</a>
+        <a href="http://localhost:8080/cycle">Cycle</a>
+        <a href="http://localhost:8080/groupe">Groupe</a>
+        <a href="http://localhost:8080/semestre">Semestre</a>
+        <a href="http://localhost:8080/maquette">Maquette</a>
+        <a href="http://localhost:8080/ue">UE</a>
+        <a href="http://localhost:8080/module">Module</a>
+        <a href="http://localhost:8080/enseignement">Enseignement</a>
+        <a href="http://localhost:8080/emploi">Emploi du temps</a>
+        <a href="http://localhost:8080/seance">Seance</a>
+        <a href="http://localhost:8080/repartition">Repartition</a>
+        <a href="http://localhost:8080/batiment">Batiment</a>
+        <br/><br/><br/><br/><br/><br/><br/>
+    </div>
+
+    <div id="main">
+        <h2>Sidenav Push Example</h2>
+        <p>Click on the element below to open the side navigation menu, and push this content to the right.</p>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Dashboard</span>
+    </div>
+
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+        }
+    </script>
+
+</body>
+</html>

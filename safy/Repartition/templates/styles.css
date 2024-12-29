@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+}
+
+.toolbar{
+    flex: 1;
+}
+
+.test1{
+    flex: 1;
+    background-color: green;
+}

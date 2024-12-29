@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="../static/css/buttons.dataTables.min.css" th:href="@{/css/buttons.dataTables.min.css}"/>
+    <link rel="stylesheet" href="../static/css/jquery.dataTables.min.css" th:href="@{/css/jquery.dataTables.min.css}"/>
+    <script src="../static/js/jquery-3.7.0.js" th:src="@{/js/jquery-3.7.0.js}"></script>
+    <script src="../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script src="../static/js/dataTables.buttons.min.js" th:src="@{/js/dataTables.buttons.min.js}"></script>
+    <script src="../static/js/jquery.dataTables.min.js" th:src="@{/js/jquery.dataTables.min.js}"></script>
+
+    <style>
+        body{
+        background-image: url("/vert7.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+        header {
+            background-color: rgb(5, 89, 5);
+            padding: 5px;    
+            color: white;
+            width: 100%;
+            }
+            header h3 {
+            margin: 0;
+            margin-left: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: moveText 1s linear infinite;
+            }
+        .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: darkgreen;
+        background-image: url("/green.jpeg");
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        }
+
+        .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+        color: darkorange;
+        }
+
+        .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        }
+
+        #main {
+        transition: margin-left .5s;
+        padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $("#table_Vacataire").DataTable({
+            });
+        })
+    </script>
+    <title>vacataire</title>
+</head>
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <img src="/logo.png" alt="Logo UASZ" width="100" height="100" style="text-align:center; border-radius:50%;"/>
+        <br/><br/>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="http://localhost:8080/maquette/filiere">Filiere</a>
+        <a href="http://localhost:8080/maquette/formation">Formation</a>
+        <a href="http://localhost:8080/maquette/classe">Classe</a>
+        <a href="http://localhost:8080/maquette/cycle">Cycle</a>
+        <a href="http://localhost:8080/maquette/groupe">Groupe</a>
+        <a href="http://localhost:8080/maquette/semestre">Semestre</a>
+        <a href="http://localhost:8080/maquette/maquette">Maquette</a>
+        <a href="http://localhost:8080/maquette/ue">UE</a>
+        <a href="http://localhost:8080/maquette/module">Module</a>
+        <a href="http://localhost:8080/maquette/enseignement">Enseignement</a>
+        <a href="http://localhost:8080/emploiDuTemps/emploi">Emploi du temps</a>
+        <a href="http://localhost:8080/emploiDuTemps/seance">Seance</a>
+        <a href="http://localhost:8080/emploiDuTemps/repartition">Repartition</a>
+        <a href="http://localhost:8080/emploiDuTemps/batiment">Batiment</a>
+        <br/><br/><br/><br/><br/><br/><br/>
+    </div>
+
+
+<div id="main">
+    <header style="display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <span style="font-size: 30px; cursor: pointer; margin: 0;" onclick="openNav()">&#9776; DASHBOARD</span>
+        <h3 style="margin: 0; margin-left: auto; left: -100%;animation: moveText 15s linear infinite;">L'excellence ma référence</h3>
+        <img src="/logo.png" alt="Logo UASZ" width="100" height="80" style="border-radius: 50%; margin-left: auto;" />
+    </header>
+
+<h3 style="text-align:center " class="modal-title"> <strong> Liste des vacataires</strong></h3>
+
+<div class="row" style="padding-bottom:10px; padding-top:10px">
+    <div style="text-align:center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_Vacataire" >Ajouter Vacataire</button>
+    </div>
+</div>
+
+<div data-dismiss="modal" style="">
+    <div class="modal fade" id="form_Ajouter_Vacataire">
+        <div class="modal-dialog">
+            <div class="modal-content panel-success">
+                <!--modal Header -->
+
+                <div class="modal-header panel-heading">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <h4 class="modal-title" style="text-align:center">Ajouter un vacataire</h4>
+                </div>
+
+
+                <!--modal body -->
+
+                <form th:action="@{ajouterVacataire}" method="post">
+                    <div class="modal-body">
+                        <label for="specialite" >Specialiter</label>
+                        <input type="text" class="form-control" id="specialite" name="specialite" required/>
+
+                        <label for="nom" >Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" required/>
+
+                        <label for="prenom" >Prenom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" required/>
+
+                        <label for="grade" >Grade</label>
+                        <input type="text" class="form-control" id="grade" name="grade" required/>
+
+                    <!--modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success col-md-3" >Ajouter</button>
+                        <button type="button" class="btn btn-sm " data-dismiss="modal">Annuler</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="table-responsive">
+<table class="table table-bordered table-striped" id="table_Vacataire">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Grade</th>
+        <th>DateDeCreation</th>
+        <th>Specialite</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="v:${ListeDesVacs}">
+        <td th:text="${v.nom}"></td>
+        <td th:text="${v.prenom}"></td>
+        <td th:text="${v.grade}"></td>
+        <td th:text="${v.datecreation}"></td>
+        <td th:text="${v.specialite}"></td>
+        <td>
+            <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_Vacataire'+${v.id}">Modifier</button>
+            <button class="btn btn-danger" data-title="Delete" data-toggle="modal" th:attr="data-target='#form_Supprimer_Vacataire'+${v.id}">Supprimer</button>
+        </td>
+
+        <div class="modal fade" th:id="'form_Supprimer_Vacataire'+${v.id}">
+            <div class="modal-dialog">
+                <div class="modal-content panel-danger">
+                    <!-- Modal header -->
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="text-align:center">Confirmation de suppression</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p><strong>Voulez-vous vraiment supprimer cet élément ?</strong></p>
+                        <form th:action="@{supprimerVac}" method="delete">
+                            <div class="modal-body">
+                                <div style="display: none">
+                                    <input name="id" th:value="${v.id}"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" class="form-control" th:value="${v.nom}" name="nom" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prenom" >Debut</label>
+                                    <input type="text" class="form-control" th:value="${v.prenom}" name="prenom"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="grade" >Debut</label>
+                                    <input type="text" class="form-control" th:value="${v.grade}" name="grade"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="specialite">Specialité:</label>
+                                    <input type="text" class="form-control" name="specialite" th:value="${v.specialite}" />
+                                </div>
+
+                            <!--modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger col-md-3" >Confirmer</button>
+                                <button type="button" class="btn btn-sm " data-dismiss="modal">Annuler</button>
+                            </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debut du popup de modifier -->
+        <div data-dismiss="modal" style="">
+            <div class="modal fade" th:attr="id='form_Modifier_Vacataire'+${v.id}">
+                <div class="modal-dialog">
+                    <div class="modal-content panel-info">
+                        <!--header body -->
+                        <div class="modal-header panel-heading">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" style="text-align:center">Modifier UE</h4>
+                        </div>
+
+
+                        <form th:action="@{modifierVac}" method="post">
+                            <div class="modal-body">
+                                <div style="display: none">
+                                    <input name="id" th:value="${v.id}"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" class="form-control" th:value="${v.nom}" name="nom" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prenom" >Prenom</label>
+                                    <input type="text" class="form-control" th:value="${v.prenom}" name="prenom"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="grade" >Grade</label>
+                                    <input type="text" class="form-control" th:value="${v.grade}" name="grade"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="Specialite">Specialité:</label>
+                                        <input type="text" class="form-control" name="specialite" th:value="${v.specialite}" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info btn-sm col-md-3" >Modifier</button>
+                                <button type="button" class="btn btn-sm " data-dismiss="modal">Annuler</button>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
+</body>
+</html>
